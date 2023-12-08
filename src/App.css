@@ -25,6 +25,22 @@ img {
     color: purple;
 }
 
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}
+
 .different {
     color: blue;
 }
