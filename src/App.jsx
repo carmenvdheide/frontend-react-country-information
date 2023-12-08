@@ -9,97 +9,60 @@ import areaColor from "./helpers/areaColor.js";
 
 
 function App() {
-
-    const [countries, setCountries] = useState('')
-    const [populationNumber, setPopulationNumber] = useState(0)
-    const [region, setRegion] = useState('')
-    const [regionColor, setRegionColor] = useState('')
-    const [flag, setFlag] = useState('')
+    const [data, setData] = useState(null)
+    const [sortedData, setSortedData] = useState(null)
+    const [display, setDisplay] = useState('start')
 
 
     function handleColor(region) {
-
         const color = areaColor(region)
-        setRegionColor(color)
+        return color
     }
 
     async function allCountries() {
         try {
-
             const result = await axios.get('https://restcountries.com/v3.1/all')
-
-
-
-            const dataMapped = result.data.map((info) => {
-                setCountries(info.name.common)
-                setPopulationNumber(info['population'])
-                setFlag(info.flags.svg)
-                setRegion(info['region'])
-                {handleColor(info['region'])}
-
-
-                return (
-                        <li className="country-card">
-                            <img src={flag}/>
-                            <div>
-                                <h3 className={regionColor}>{countries}</h3>
-                                <p>Has a population of {populationNumber} people</p>
-                            </div>
-                        </li>
-
-
-                )
-            })
-
-
-
+            setData(result.data)
+            setSortedData(data.sort((a, b) => {
+                return a['population'] - b['population']
+            }))
             console.log(result.data)
-            console.log(result.data[0].flags.svg)
-            // setCountries(result.data[0].name.common)
-            // setPopulationNumber(result.data[0]['population'])
-            // setRegion(result.data[0]['region'])
-            // setFlag(result.data[0].flags.svg)
-
-            // {handleColor(result.data[0]['region'])}
-
-
-
-
+            setDisplay('dont-display')
         } catch (e) {
             console.error(e)
         }
-
-
     }
 
 
     return (
         <>
-
             <body>
                 <button
+                    className={display}
                     type="button"
                     onClick={allCountries}>
-                    Go!
+                    show countries
                 </button>
-                <ul> {
-                            allCountries
-                        }
-                </ul>
+
                 <ul>
-                    <li className="country-card">
-                        <img src={flag}/>
-                        <div>
-                            <h3 className={regionColor}>{countries}</h3>
-                            <p>Has a population of {populationNumber} people</p>
-                        </div>
-
-                    </li>
+                    {
+                        sortedData ? sortedData.map((country) => {
+                            return (
+                                <li className="country-card" key={country['ccn3']}>
+                                    <img src={country.flags['png']}/>
+                                    <div>
+                                        <h3 className={handleColor(country.region)
+                                        }>{country.name.common}</h3>
+                                        <p>Has a population of {country['population']} people</p>
+                                    </div>
+                                </li>
+                            )
+                        }) : ""
+                    }
                 </ul>
 
-            <ul>
 
-            </ul>
+
 
 
             </body>

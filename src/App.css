@@ -1,7 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.start {
+    background-color: #ec786d;
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 60px;
+    align-self: center;
+    color: white;
+    text-transform: uppercase;
+}
+
+.start:hover {
+    cursor: pointer;
+}
+
+.dont-display {
+    display: none;
+}
+
+
 p {
-    font-family: 'Poppins', sans-serif; ;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
 }
 
 h3 {
@@ -12,35 +38,48 @@ li {
     list-style: none;
 }
 
+ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .country-card {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    /*border: 1px solid grey;*/
+    max-width: 700px;
+    /*background-color: rgba(190, 180, 139, 0.25);
+   */
+    background-color: #e0ddcf ;
 }
 
 img {
-    width: 15%
+    width: 25%
 }
 
 .purple {
-    color: purple;
+    color: #7400b8;
 }
 
 .red {
-    color: red;
+    color: #F94144;
 }
 
 .blue {
-    color: blue;
+    color: #277DA1;
 }
 
 .yellow {
-    color: yellow;
+    color: #F9C74F;
 }
 
 .green {
-    color: green;
+    color: #90BE6D;
 }
 
 .different {
-    color: blue;
+    color: grey;
 }
