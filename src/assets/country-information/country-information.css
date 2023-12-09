@@ -1,0 +1,33 @@
+.search-and-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    margin: 25px 30px;
+}
+
+article {
+    border-radius: 10px;
+    box-shadow: grey 3px 3px 10px;
+    max-width: 600px;
+}
+
+.country-info {
+    margin: 20px 30px;
+}
+
+span {
+    width: 20%;
+}
+
+img {
+ width: 100%;
+}
