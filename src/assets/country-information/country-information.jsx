@@ -6,13 +6,6 @@ import roundToMillions from "../../helpers/roundToMillions.js";
 function CountryInformation() {
     const [data, setData] = useState(null)
     const [inputValue, setInputValue] = useState('')
-    const [name, setName] = useState('')
-    const [flagImage, setFlagImage] = useState('')
-    const [subArea, setSubArea] = useState('')
-    const [capital, setCapital] = useState('')
-    const [population, setPopulation] = useState(0)
-    const [amountNeighbors, setAmountNeighbors] = useState(0)
-    const [domain, setDomain] = useState('')
     const [error, setError] = useState('')
 
    const handleEnter = (e) => {
@@ -27,14 +20,9 @@ function CountryInformation() {
             const result = await axios.get('https://restcountries.com/v3.1/name/' + inputValue)
             setError(!'error')
             setData(result.data[0])
-            setName(result.data[0].name.common)
-            setFlagImage(result.data[0].flags['png'])
-            setSubArea(result.data[0]['subregion'])
-            setCapital(result.data[0]['capital'])
-            setPopulation(result.data[0]['population'])
-            setAmountNeighbors(result.data[0]['borders'].length)
-            setDomain(result.data[0]['tld'])
+
             console.log(result.data[0])
+            console.log(result)
         } catch (e) {
             console.error(e)
             setError("error")
@@ -60,26 +48,21 @@ function CountryInformation() {
                 SEARCH</button>
 
             {error ? <p>This country doesn't exist, try again.</p> : ''}
-            {name ?
+            {data ?
                 <article>
                     <div className="top">
-                        <span><img src={flagImage} alt="flag image"/></span>
-                        <p>{name}</p>
+                        <span><img
+                            id="img-country-information"
+                            src={data.flags['png']}
+                            alt="flag image"/></span>
+                        <p>{data.name.common}</p>
                     </div>
-                    <p className="country-info">{name} is situated in {subArea} and the capital is {capital}. It has a population of {roundToMillions(population)}  people and it borders with {amountNeighbors} neighboring countries. Websites can be found on {domain} domains.</p>
+                    <p className="country-info">{data.name.common} is situated in {data['subregion']} and the capital is {data['capital']}. It has a population of {roundToMillions(data['population'])}  people and it borders with {data['borders'].length} neighboring countries. Websites can be found on {data['tld']} domains.</p>
+
                 </article>
                 : ''}
-
-
-
-
-
-
-
         </div>
-
-        )
-
+    )
 }
 
 export default CountryInformation
